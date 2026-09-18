@@ -5,22 +5,222 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>atlnacional.com.co</title>
-  <link rel="stylesheet" href="styles.css">
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+      background-color: #f4f4f4;
+      color: #1a1a1a;
+    }
+
+    @font-face {
+      font-family: 'Noto Sans Custom';
+      font-style: italic;
+      font-weight: 100;
+      src: url('mifuente.woff2') format('woff2');
+      font-stretch: 100%;
+    }
+
+    * {
+      font-family: 'Noto Sans Custom', sans-serif;
+      font-style: italic;
+      font-stretch: 100%;
+      box-sizing: border-box;
+    }
+
     ul {
       list-style: none;
       margin: 0;
       padding: 0;
     }
 
+    .navarriba {
+      background-color: #009E4F;
+      width: 100%;
+    }
+
+    .navarriba ul {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 24px 28px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .navarriba li {
+      display: flex;
+      align-items: center;
+      margin: 0;
+    }
+
+    .navarriba li:not(:last-child)::after {
+      content: "|";
+      color: #ffffff;
+      opacity: 0.6;
+      margin: 0 14px;
+      font-size: 11px;
+    }
+
+    .navarriba a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 100;
+      text-transform: uppercase;
+    }
+
+    .navabajo {
+      background-color: #2b2b2b;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      height: 90px;
+      gap: 16px;
+    }
+
+    .nacional {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-right: 4px;
+    }
+
+    .nacional img {
+      height: 76px;
+      width: auto;
+    }
+
+    .hamburger-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+      margin-right: 8px;
+    }
+
+    .hamburger-btn span {
+      width: 22px;
+      height: 2px;
+      background-color: #ffffff;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .menu li:not(.nacional) > a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 100;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-arrow {
+      font-style: normal;
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #2b2b2b;
+      border: 1px solid #444444;
+      border-radius: 4px;
+      min-width: 190px;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      z-index: 100;
+      padding: 6px 0;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: flex;
+    }
+
+    .dropdown:hover .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu li a {
+      color: #ffffff;
+      padding: 8px 14px;
+      font-size: 12px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: #3a3a3a;
+    }
+
+    .social {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-left: auto;
+    }
+
+    .social a {
+      display: flex;
+      align-items: center;
+      font-size: 0;
+      color: transparent;
+    }
+
+    .social img {
+      width: 18px;
+      height: 18px;
+      filter: brightness(0) invert(1);
+    }
+
     .search {
       display: flex;
       align-items: center;
+      position: relative;
+      margin-left: 10px;
     }
 
     .search input {
-      padding: 6px;
-      border: 1px solid #ccc;
+      width: 0;
+      opacity: 0;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: #ffffff;
+      font-size: 12px;
+      transition: width 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+      outline: none;
+    }
+
+    .search:hover input,
+    .search input:focus {
+      width: 140px;
+      opacity: 1;
+      padding: 6px 10px;
+      background: #3a3a3a;
+      border: 1px solid #555555;
       border-radius: 4px;
     }
 
@@ -28,129 +228,185 @@
       background: none;
       border: none;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      z-index: 1;
     }
 
     .search button img {
-      width: 30px;
-      height: 30px;
-      transition: transform 0.2s;
+      width: 20px;
+      height: 20px;
+      filter: brightness(0) invert(1);
     }
 
-    .search button img:hover {
-      transform: scale(1.1);
-    }
-
-    .navarriba ul {
-      display: flex;
-      justify-content: center;
-      background-color: #00a751;
-      padding: 10px 0;
-    }
-
-    .navarriba li {
-      margin: 0 15px;
-    }
-
-    .navarriba a {
-      text-decoration: none;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      font-weight: bold;
-      padding: 8px 12px;
-      border-radius: 4px;
-    }
-
-    .navarriba a[href*="LINEA_TRANSPARENCIA"] {
-      font-weight: 900;
-    }
-
-    .navabajo {
-      background-color: #000000;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nacional {
-      height: 70px;
-    }
-
-    .social li {
-      display: flex;
-      align-items: center;
-    }
-
-    .social {
-      display: flex;
-      gap: 15px;
-      margin-left: auto;
-    }
-
-    .videocopa {
-      display: block;
-      margin-top: 40px;
-    }
-
-    .menu,
-    .social {
-      display: flex;
-      gap: 20px;
-    }
-
-    .menu a,
-    .social a {
-      text-decoration: none;
-      color: #ffffff;
-      font-weight: bold;
-    }
-
-    .menu a:hover,
-    .social a:hover {
-      text-decoration: underline;
-    }
-
-    .banner {
-      background: url('fireworks.jpg') no-repeat center center;
-      background-size: cover;
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .banner h1 {
-      font-size: 2.5em;
-      margin: 0;
-    }
-
-    .banner p {
-      font-size: 1.2em;
-      margin: 10px 0;
-    }
-
-    .posicionescopa,
-    .posiciones,
-    .proximospartidos,
-    .ultimasnoticias,
-    .tiendaverde {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .videocopa-container {
       width: 100%;
-      min-height: 300px;
-      background-color: #f0f0f0;
+      background-color: #000000;
     }
 
-    section.ultimasnoticias {
+    .videocopa img {
+      width: 100%;
+      display: block;
+    }
+
+    .yt-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #000000;
+      padding: 10px 16px;
+      position: relative;
+    }
+
+    .yt-progress-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .yt-progress-bar {
+      width: 80%;
+      height: 100%;
+      background-color: #ff0000;
+    }
+
+    .yt-timestamp {
+      background-color: rgba(30, 30, 30, 0.85);
+      color: #ffffff;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-family: sans-serif;
+      font-style: normal;
+    }
+
+    .yt-controls-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .yt-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .yt-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    .yt-cc-badge {
       background-color: #ffffff;
+      color: #000000;
+      font-weight: bold;
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: sans-serif;
+      font-style: normal;
+    }
+
+    .yt-badge-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    main {
+      width: 100%;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      background-color: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .panels-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .panel-item {
+      background-color: #ffffff;
+      border-radius: 8px;
+      flex: 1;
+      min-width: 320px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+
+    .panel-item img {
+      width: 100%;
+      display: block;
+    }
+
+    .section-block {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-block img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      background-color: #009E4F;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 10px 24px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .full-width-section {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      padding: 24px 0;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+    }
+
+    .full-width-section img {
+      width: 100%;
+      max-width: 100%;
+      display: block;
+      border-radius: 0;
     }
 
     footer {
-      background-color: #00a751;
+      background-color: #1a1a1a;
       text-align: center;
-      padding: 15px;
-      color: white;
-      font-weight: bold;
+      padding: 24px;
+      color: #ffffff;
+      font-size: 12px;
+      margin-top: 40px;
     }
   </style>
 </head>
@@ -171,84 +427,132 @@
     </nav>
 
     <nav class="navabajo">
+      <a href="https://atlnacional.com.co/" class="nacional">
+        <img src="imagenes/nacional.png" alt="escudo">
+      </a>
+
+      <button class="hamburger-btn" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       <ul class="menu">
-        <li class="nacional">
-          <a href="https://atlnacional.com.co/"></a>
-          <img src="imagenes/nacional.png" alt="escudo del atletico nacional">
-        </li>
         <li><a href="abonados.html">Abonados</a></li>
         <li><a href="boleteria.html">Boletería</a></li>
-        <li><a href="escuela.html">Escuela</a></li>
-        <li><a href="tienda.html">Tienda</a></li>
+        <li class="dropdown">
+          <a href="escuela.html">Escuela <i class="dropdown-arrow">▼</i></a>
+          <ul class="dropdown-menu">
+            <li><a href="escuela-futbol.html">Escuela de Fútbol</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="tienda.html">Tienda <i class="dropdown-arrow">▼</i></a>
+          <ul class="dropdown-menu">
+            <li><a href="tienda-fisica.html">Tienda Física</a></li>
+            <li><a href="tienda-virtual.html">Tienda Virtual</a></li>
+          </ul>
+        </li>
         <li><a href="franquicias.html">Franquicias</a></li>
       </ul>
 
       <ul class="social">
-        <li><a href="https://www.instagram.com/atlnacionaloficial" target="_blank"><img src="imagenes/instagram.png" alt="Instagram" width="20" height="20"> Instagram</a></li>
-        <li><a href="https://www.facebook.com/atlnacionaloficial" target="_blank"><img src="imagenes/facebook.png" alt="Facebook" width="20" height="20"> Facebook</a></li>
-        <li><a href="https://www.youtube.com/@atlnacionaloficial" target="_blank"><img src="imagenes/youtube.png" alt="YouTube" width="20" height="20"> YouTube</a></li>
-        <li><a href="https://x.com/atlnacionaloficial" target="_blank"><img src="imagenes/x.jpeg" alt="X" width="20" height="20"> X</a></li>
-        <li><a href="https://www.tiktok.com/@atlnacionaloficial" target="_blank"><img src="imagenes/tiktok.jpeg" alt="TikTok" width="20" height="20"> TikTok</a></li>
-        <li><a href="https://www.linkedin.com/company/atlnacionaloficial" target="_blank"><img src="imagenes/linkedlin.png" alt="LinkedIn" width="20" height="20"> LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/atlnacionaloficial" target="_blank"><img src="imagenes/instagram.png" alt="ig" width="18" height="18"></a></li>
+        <li><a href="https://www.facebook.com/atlnacionaloficial" target="_blank"><img src="imagenes/facebook.png" alt="fb" width="18" height="18"></a></li>
+        <li><a href="https://www.youtube.com/@atlnacionaloficial" target="_blank"><img src="imagenes/youtube.png" alt="yt" width="18" height="18"></a></li>
+        <li><a href="https://x.com/atlnacionaloficial" target="_blank"><img src="imagenes/x.jpeg" alt="x" width="18" height="18"></a></li>
+        <li><a href="https://www.tiktok.com/@atlnacionaloficial" target="_blank"><img src="imagenes/tiktok.jpeg" alt="tt" width="18" height="18"></a></li>
+        <li><a href="https://www.linkedin.com/company/atlnacionaloficial" target="_blank"><img src="imagenes/linkedlin.png" alt="li" width="18" height="18"></a></li>
       </ul>
 
       <form class="search" action="https://www.atlnacional.com.co" method="get" target="_blank">
         <input type="text" placeholder="Buscar...">
         <button type="submit">
-          <img src="imagenes/search.jpeg" alt="Buscar" width="30" height="30">
+          <img src="imagenes/search.jpeg" alt="Buscar" width="20" height="20">
         </button>
       </form>
     </nav>
 
-    <section>
-      <ul class="videocopa">
-        <li><img src="imagenes/videocopa.png" alt="final contra medellin"></li>
-      </ul>
-    </section>
+    <div class="videocopa-container">
+      <div class="videocopa">
+        <img src="imagenes/videocopa.png" alt="video">
+      </div>
+      <div class="yt-controls">
+        <div class="yt-progress-container">
+          <div class="yt-progress-bar"></div>
+        </div>
+        <div class="yt-timestamp">12:54 / 16:13</div>
+        <div class="yt-controls-right">
+          <button class="yt-btn">
+            <svg viewBox="0 0 24 24"><path d="M15 5.63 20.66 12 15 18.37v-4.57c-4 0-6.82 1.3-9 3.82 0-5 3.5-9.67 9-10.74V5.63M14 3v6C6.22 10.13 3.11 15.33 2 21c2.78-3.97 6.44-6 12-6v6l8-9-8-9z"/></svg>
+          </button>
+          <button class="yt-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-6h2v6zm0-8h-2V6h2v2z"/></svg>
+          </button>
+          <button class="yt-btn">
+            <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7.0-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          </button>
+          <button class="yt-badge-btn">
+            <span class="yt-cc-badge">CC</span>
+          </button>
+          <button class="yt-btn">
+            <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
   </header>
 
   <main>
-    <section class="banner">
-      <h1>DIM vs Atlético Nacional</h1>
-      <p>Copa Colombia | FINAL - MATCHDAY</p>
-      <span>Fuente: Atlético Nacional TV</span>
+    <section class="panels-row">
+      <div class="panel-item"><img src="imagenes/copa.png" alt="partidos"></div>
+      <div class="panel-item"><img src="imagenes/posiciones.png" alt="posiciones"></div>
     </section>
 
-    <section>
-      <h1>ULTIMOS PARTIDOS</h1>
+    <section class="section-block">
+      <img src="imagenes/tiendaverde.png" alt="tienda">
+      <a href="tienda-virtual.html" class="store-btn">IR A LA TIENDA</a>
     </section>
 
-    <section class="posicionescopa">
-      <img src="imagenes/copa.png" alt="ultimos partidos jugados del nacional">
+    <section class="section-block">
+      <img src="imagenes/proximospartidos.png" alt="próximos">
     </section>
 
-    <section class="posiciones">
-      <img src="imagenes/posiciones.png" alt="tabla de posiciones">
+    <section class="section-block">
+      <img src="imagenes/conferencias.png.png" alt="conferencias">
     </section>
 
-    <section class="proximospartidos">
-      <img src="imagenes/proximospartidos.png" alt="proximos partidos">
+    <section class="section-block">
+      <img src="imagenes/coleccion.png" alt="colección">
     </section>
 
-    <section>
-      <img src="imagenes/ultima.png" alt="ULTIMAS NOTICIAS">
+    <section class="section-block">
+      <img src="imagenes/agrupacion.png" alt="agrupación">
+    </section>
+  </main>
+
+  <section class="full-width-section">
+    <img src="imagenes/vamosverde.png" alt="vamos">
+  </section>
+
+  <section class="full-width-section">
+    <img src="imagenes/reydecopas.png" alt="rey">
+  </section>
+
+  <main style="padding-top: 0;">
+    <section class="section-block">
+      <img src="imagenes/periodista.png" alt="periodista">
     </section>
 
-    <section class="ultimasnoticias">
-      <img src="imagenes/ultimasnoticias.png" alt="ultimas noticias del nacional">
+    <section class="section-block">
+      <img src="imagenes/siguenos.png" alt="síguenos">
+      <img src="imagenes/oficialsuplers.png" alt="suplers">
     </section>
+  </main>
 
-    <section class="tiendaverde">
-      <img src="imagenes/tiendaverde.png" alt="tienda del verde">
-    </section>
+  <footer>
+    <p>Atlético Nacional</p>
+  </footer>
+</body>
 
-    <div class="accordion" id="accordionEjemplo">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Sección 1
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionEjemplo">
-          <div class="accordion-body">
-            Cont
+</html>
